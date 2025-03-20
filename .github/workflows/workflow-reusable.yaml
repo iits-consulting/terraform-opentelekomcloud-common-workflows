@@ -21,7 +21,7 @@ jobs:
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Format terraform code"
+          commit_message: "chore: format terraform code (automated)"
 
   docs:
     runs-on: ubuntu-latest
@@ -42,9 +42,12 @@ jobs:
         uses: terraform-docs/gh-actions@main
         with:
           config-file: .terraform-docs.yaml
-          git-push: "true"
+          git-push: "false"
           working-dir: .
 
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update tfdocs in README.md (automated)"
 
   linting:
     runs-on: ubuntu-latest
