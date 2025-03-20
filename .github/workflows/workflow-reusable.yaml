@@ -73,25 +73,28 @@ jobs:
       - name: Run TFLint
         run: tflint -f compact
 
-  trivy:
-    name: Trivy
-    runs-on: ubuntu-20.04
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@0.28.0
-      with:
-        scan-type: 'config'
-        hide-progress: true
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        exit-code: '1'
-        severity: 'CRITICAL,HIGH'
-
-    - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: 'trivy-results.sarif'
-
+  # currently not in use since for the OpenTelekomCloud there are no rules which identify misconfigurations
+  # it makes sense to enable it onece there are rules for the OpenTelekomCloud
+  #
+  # trivy:
+  #   name: Trivy
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #
+  #   - name: Run Trivy vulnerability scanner in IaC mode
+  #     uses: aquasecurity/trivy-action@0.28.0
+  #     with:
+  #       scan-type: 'config'
+  #       hide-progress: true
+  #       format: 'sarif'
+  #       output: 'trivy-results.sarif'
+  #       exit-code: '1'
+  #       severity: 'CRITICAL,HIGH'
+  #
+  #   - name: Upload Trivy scan results to GitHub Security tab
+  #     uses: github/codeql-action/upload-sarif@v3
+  #     with:
+  #       sarif_file: 'trivy-results.sarif'
+  #
